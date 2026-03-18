@@ -252,9 +252,12 @@ export default function ProjectViewer() {
                 key={photo.id}
                 type="button"
                 className="photo-card"
-                onClick={() => setLightboxImage(photo.fullURL || photo.imageURL || photo.thumbnailURL)}
+                onClick={() => setLightboxImage(photo.annotatedImageURL || photo.fullURL || photo.imageURL || photo.thumbnailURL)}
               >
-                <img src={photo.thumbnailURL || photo.fullURL || photo.imageURL} alt="Project photo" loading="lazy" />
+                <div className="photo-thumb-wrapper">
+                  <img src={photo.annotatedImageURL || photo.thumbnailURL || photo.fullURL || photo.imageURL} alt="Project photo" loading="lazy" />
+                  {photo.annotatedImageURL && <span className="annotation-badge" title="Annotated">✏️</span>}
+                </div>
                 <div className="photo-info">
                   <div className="photo-date">
                     {formatDate(photo.timestamp)} at {formatTime(photo.timestamp)}
